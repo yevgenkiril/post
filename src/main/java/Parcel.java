@@ -1,27 +1,29 @@
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Objects;
 
 public class Parcel {
-    public static int id;
-    public Status status;
-    public Date receiptDate;
-    public String sender;
-    public String recipient;
-    public String name;
+    private static int id;
 
-    public Parcel(Status status, Date receiptDate, String sender, String recipient, String name) {
+    private Status status;
+    private LocalDateTime receiptDate;
+    private Clients sender;
+    private Clients recipient;
+    private String name;
+    private final int identifier;
+
+    public Parcel(Status status, LocalDateTime receiptDate, Clients sender, Clients recipient, String name) {
         this.status = status;
         this.receiptDate = receiptDate;
         this.sender = sender;
         this.recipient = recipient;
         this.name = name;
+        id+=id;
+        identifier = id;
     }
 
-    public static int getId() {
-        return id;
-    }
-
-    public static void setId(int id) {
-        Parcel.id = id;
+    public int getIdentifier() {
+        return identifier;
     }
 
     public Status getStatus() {
@@ -32,27 +34,27 @@ public class Parcel {
         this.status = status;
     }
 
-    public Date getReceiptDate() {
+    public LocalDateTime getReceiptDate() {
         return receiptDate;
     }
 
-    public void setReceiptDate(Date receiptDate) {
+    public void setReceiptDate(LocalDateTime receiptDate) {
         this.receiptDate = receiptDate;
     }
 
-    public String getSender() {
+    public Clients getSender() {
         return sender;
     }
 
-    public void setSender(String sender) {
+    public void setSender(Clients sender) {
         this.sender = sender;
     }
 
-    public String getRecipient() {
+    public Clients getRecipient() {
         return recipient;
     }
 
-    public void setRecipient(String recipient) {
+    public void setRecipient(Clients recipient) {
         this.recipient = recipient;
     }
 
@@ -65,12 +67,15 @@ public class Parcel {
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Parcel parcel = (Parcel) o;
+        return identifier == parcel.identifier && status == parcel.status && Objects.equals(receiptDate, parcel.receiptDate) && Objects.equals(sender, parcel.sender) && Objects.equals(recipient, parcel.recipient) && Objects.equals(name, parcel.name);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public int hashCode() {
+        return Objects.hash(status, receiptDate, sender, recipient, name, identifier);
     }
 }
