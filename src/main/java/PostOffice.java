@@ -1,25 +1,30 @@
-import java.time.DayOfWeek;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class PostOffice {
     private static int id;
     private String name;
-    private ArrayList<Employees> employees;
-    private ArrayList<Parcel> parcels;
-    private DateIntervalForPost dateInterval;
+    private Set<Employees> employees;
+    private Set<Parcel> parcels;
+    private DateIntervalDayOfWeek dateInterval;
     private final int identifier;
 
 
-    public PostOffice(String name, ArrayList<Employees> employees, ArrayList<Parcel> parcels, DateIntervalForPost dateInterval) {
+    public PostOffice(String name,  DateIntervalDayOfWeek dateInterval) {
         this.name = name;
-        this.employees = employees;
-        this.parcels = parcels;
+        this.employees = new HashSet<>();
+        this.parcels = new HashSet<>();
         this.dateInterval = dateInterval;
-        id+=id;
+        id=id+1;
         identifier=id;
+    }
+
+    public void addParcel(Clients clients, Parcel parcel) throws Exception {
+        clients.addParcel(parcel);
+        parcels.add(parcel);
+        parcel.setStatus(Status.IN_POST, "Moving parcel to post");
     }
 
     public int getIdentifier() {
@@ -34,19 +39,19 @@ public class PostOffice {
         this.name = name;
     }
 
-    public DateIntervalForPost getDateInterval() {
+    public DateIntervalDayOfWeek getDateInterval() {
         return dateInterval;
     }
 
-    public void setDateInterval(DateIntervalForPost dateInterval) {
+    public void setDateInterval(DateIntervalDayOfWeek dateInterval) {
         this.dateInterval = dateInterval;
     }
 
-    public ArrayList<Employees> getEmployees() {
+    public Set<Employees> getEmployees() {
         return employees;
     }
 
-    public ArrayList<Parcel> getParcels() {
+    public Set<Parcel> getParcels() {
         return parcels;
     }
 

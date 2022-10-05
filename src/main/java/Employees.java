@@ -1,22 +1,19 @@
-import java.util.Calendar;
-import java.util.Date;
-import java.time.DayOfWeek;
-import java.time.Period;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Employees extends Human{
-    private DateIntervalForEmployees dateInterval;
+    private DateIntervalLocalDateTime dateInterval;
 
-    public Employees(String firstName, String lastName, Calendar birthday, DateIntervalForEmployees dateInterval) {
+    public Employees(String firstName, String lastName, LocalDate birthday, DateIntervalLocalDateTime dateInterval) {
         super(firstName, lastName, birthday);
         this.dateInterval = dateInterval;
     }
 
-    public DateIntervalForEmployees getDateInterval() {
+    public DateIntervalLocalDateTime getDateInterval() {
         return dateInterval;
     }
 
-    public void setDateInterval(DateIntervalForEmployees dateInterval) {
+    public void setDateInterval(DateIntervalLocalDateTime dateInterval) {
         this.dateInterval = dateInterval;
     }
 

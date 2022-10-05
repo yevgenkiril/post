@@ -1,24 +1,24 @@
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Parcel {
     private static int id;
 
     private Status status;
-    private LocalDateTime receiptDate;
+    private LocalDateTime receiptDate = LocalDateTime.now();
     private Clients sender;
     private Clients recipient;
     private String name;
     private final int identifier;
 
-    public Parcel(Status status, LocalDateTime receiptDate, Clients sender, Clients recipient, String name) {
-        this.status = status;
-        this.receiptDate = receiptDate;
+    public Parcel(Clients sender, Clients recipient, String name) {
+        this.status = Status.CREATED;
         this.sender = sender;
         this.recipient = recipient;
         this.name = name;
-        id+=id;
+        id += id;
         identifier = id;
     }
 
@@ -30,9 +30,22 @@ public class Parcel {
         return status;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+
+    public List<ParcelHistory> getHistory() {
+        return list;
     }
+
+    List<ParcelHistory> list = new ArrayList<>();
+
+    public void setStatus(Status status, String cause) throws Exception {
+        if (this.status.equals(status)) {
+            throw new Exception("Посылка уже емеет статус " + status);
+        } else{
+            list.add(new ParcelHistory(this.status, status, cause));
+            this.status = status;
+        receiptDate = LocalDateTime.now();}
+    }
+
 
     public LocalDateTime getReceiptDate() {
         return receiptDate;
@@ -71,11 +84,11 @@ public class Parcel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Parcel parcel = (Parcel) o;
-        return identifier == parcel.identifier && status == parcel.status && Objects.equals(receiptDate, parcel.receiptDate) && Objects.equals(sender, parcel.sender) && Objects.equals(recipient, parcel.recipient) && Objects.equals(name, parcel.name);
+        return identifier == parcel.identifier && status == parcel.status && Objects.equals(receiptDate, parcel.receiptDate) && Objects.equals(name, parcel.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(status, receiptDate, sender, recipient, name, identifier);
+        return Objects.hash(status, receiptDate, name, identifier);
     }
 }

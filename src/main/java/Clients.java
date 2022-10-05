@@ -1,11 +1,12 @@
+import java.time.LocalDate;
 import java.util.*;
 
 public class Clients extends Human{
     private Set<Parcel> parcels;
 
-    public Clients(String firstName, String lastName, Calendar birthday, Set<Parcel> parcels) {
+    public Clients(String firstName, String lastName, LocalDate birthday) {
         super(firstName, lastName, birthday);
-        this.parcels = parcels;
+        this.parcels = new HashSet<>();
     }
 
     public void setParcels(Set<Parcel> parcels) {
@@ -14,6 +15,10 @@ public class Clients extends Human{
 
     public Set<Parcel> getParcels() {
         return parcels;
+    }
+
+    public void addParcel(Parcel parcel){
+        parcels.add(parcel);
     }
 
     @Override

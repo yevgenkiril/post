@@ -2,10 +2,10 @@ import java.time.DayOfWeek;
 import java.time.Period;
 import java.util.Objects;
 
-public class DateIntervalForPost extends DateParent{
+public class DateIntervalDayOfWeek extends DateParent{
     private DayOfWeek dayOfWeek;
 
-    public DateIntervalForPost(Period period, DayOfWeek dayOfWeek) {
+    public DateIntervalDayOfWeek(Period period, DayOfWeek dayOfWeek) {
         super(period);
         this.dayOfWeek = dayOfWeek;
     }
@@ -23,7 +23,7 @@ public class DateIntervalForPost extends DateParent{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        DateIntervalForPost that = (DateIntervalForPost) o;
+        DateIntervalDayOfWeek that = (DateIntervalDayOfWeek) o;
         return dayOfWeek == that.dayOfWeek;
     }
 

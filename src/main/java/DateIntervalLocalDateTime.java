@@ -2,11 +2,11 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.Objects;
 
-public class DateIntervalForEmployees extends DateParent{
+public class DateIntervalLocalDateTime extends DateParent{
 
     private LocalDateTime localDateTime;
 
-    public DateIntervalForEmployees(Period period, LocalDateTime localDateTime) {
+    public DateIntervalLocalDateTime(Period period, LocalDateTime localDateTime) {
         super(period);
         this.localDateTime = localDateTime;
     }
@@ -24,7 +24,7 @@ public class DateIntervalForEmployees extends DateParent{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        DateIntervalForEmployees that = (DateIntervalForEmployees) o;
+        DateIntervalLocalDateTime that = (DateIntervalLocalDateTime) o;
         return Objects.equals(localDateTime, that.localDateTime);
     }
 

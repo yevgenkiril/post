@@ -1,14 +1,14 @@
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Human {
     private static int id;
     private String firstName;
     private String lastName;
-    private Calendar birthday;
+    private LocalDate birthday;
     private final int identifier;
 
-    public Human(String firstName, String lastName, Calendar birthday) {
+    public Human(String firstName, String lastName, LocalDate birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
@@ -36,11 +36,11 @@ public class Human {
         this.lastName = lastName;
     }
 
-    public Calendar getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Calendar birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
