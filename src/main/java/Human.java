@@ -1,23 +1,23 @@
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Objects;
 
 public class Human {
-    public static int id;
-    public String firstName;
-    public String lastName;
-    public Date birthday;
+    private static int id;
+    private String firstName;
+    private String lastName;
+    private LocalDate birthday;
+    private final int identifier;
 
-    public Human(String firstName, String lastName, Date birthday) {
+    public Human(String firstName, String lastName, LocalDate birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
+        id+=id;
+        identifier = id;
     }
 
-    public static int getId() {
-        return id;
-    }
-
-    public static void setId(int id) {
-        Human.id = id;
+    public int getIdentifier() {
+        return identifier;
     }
 
     public String getFirstName() {
@@ -36,21 +36,24 @@ public class Human {
         this.lastName = lastName;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return identifier == human.identifier && Objects.equals(firstName, human.firstName) && Objects.equals(lastName, human.lastName) && Objects.equals(birthday, human.birthday);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, birthday, identifier);
     }
 }
